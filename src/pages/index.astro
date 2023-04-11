@@ -1,11 +1,23 @@
 ---
-import Page from '@layouts/Page.astro';
+import Page from "@layouts/Page.astro";
+import { getCollection } from "astro:content";
+
+const blogEntries = await getCollection("blog");
 ---
 
 <Page title="FORZGC">
-	<h1>hello.</h1>
+  <h1>Blog</h1>
+  <ul>
+    {
+      blogEntries.map((blogEntry) => (
+        <li>
+          <div>{blogEntry.data.title}</div>
+          <div>{blogEntry.data.tags.join("、")}</div>
+          <div>{blogEntry.data.image}</div>
+        </li>
+      ))
+    }
+  </ul>
 </Page>
 
-<style>
-
-</style>
+<style></style>
