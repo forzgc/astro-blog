@@ -6,14 +6,33 @@ const blogEntries = await getCollection("blog");
 ---
 
 <Page title="FORZGC">
-  <h1>Blog</h1>
-  <ul>
+  <ul class="py-4 grid grid-cols-4 gap-4">
     {
       blogEntries.map((blogEntry) => (
         <li>
-          <div>{blogEntry.data.title}</div>
-          <div>{blogEntry.data.tags.join("、")}</div>
-          <div>{blogEntry.data.image}</div>
+          <a
+            class="block bg-white rounded-lg"
+            href={"/posts/" + blogEntry.slug}
+          >
+            <img
+              class="w-full h-32 object-cover rounded-t-lg"
+              src={"/images/cover/" + blogEntry.data.cover}
+              alt={blogEntry.data.cover}
+            />
+            <div class="p-2">
+              <div class="text-xl text-sky-600">{blogEntry.data.title}</div>
+              <div class="text-sm text-emerald-600">
+                {blogEntry.data.tags.join("、")}
+              </div>
+              <div class="text-sm text-right text-gray-800">
+                {blogEntry.data.date.getFullYear() +
+                  "/" +
+                  (blogEntry.data.date.getMonth() + 1) +
+                  "/" +
+                  blogEntry.data.date.getDate()}
+              </div>
+            </div>
+          </a>
         </li>
       ))
     }
