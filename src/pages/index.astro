@@ -3,6 +3,7 @@ import Page from "@layouts/Page.astro";
 import { getCollection } from "astro:content";
 
 const blogEntries = await getCollection("blog");
+blogEntries.sort((a,b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Page title="FORZGC">
@@ -16,8 +17,8 @@ const blogEntries = await getCollection("blog");
           >
             <img
               class="w-full h-32 object-cover rounded-t-lg"
-              src={"/images/cover/" + blogEntry.data.cover}
-              alt={blogEntry.data.cover}
+              src={"/images/poster/" + blogEntry.data.poster}
+              alt={blogEntry.data.poster}
             />
             <div class="p-2">
               <div class="text-xl text-sky-600">{blogEntry.data.title}</div>

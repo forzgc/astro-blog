@@ -15,5 +15,12 @@ const { Content } = await entry.render();
 ---
 
 <Page title={entry.data.title}>
-  <Content />
+  <div class="prose p-8 max-w-none bg-white">
+    <img
+      class="w-full h-auto"
+      src={"/images/poster/" + entry.data.poster}
+      alt="poster"
+    />
+    <Content />
+  </div>
 </Page>
