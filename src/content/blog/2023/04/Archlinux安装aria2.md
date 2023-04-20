@@ -1,11 +1,11 @@
 ---
-title: Archlinux安装aria2
-tags: [章鱼星球, Archlinux]
+title: archlinux安装aria2
+tags: [archlinux, aria2]
 date: 2023-04-19
 poster: 000001.jpg
 ---
 
-# Archlinux 安装 aria2
+# archlinux 安装 aria2
 
 ## 安装
 
@@ -87,3 +87,9 @@ su - root
 
 loginctl enable-linger xxx
 ```
+
+
+## ariang
+1. 下载地址 [ariang](https://github.com/mayswind/AriaNg/releases)
+
+2. 配置nginx
