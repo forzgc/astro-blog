@@ -59,7 +59,7 @@ bt-require-crypto=true
 bt-min-crypto-level=arc4
 bt-detach-seed-only=true
 
-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.47
+user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
 
 input-file=/home/xxx/.config/aria2/aria2.session
 save-session=/home/xxx/.config/aria2/aria2.session
@@ -71,6 +71,10 @@ rpc-allow-origin-all=true
 rpc-listen-all=true
 rpc-listen-port=6800
 rpc-secret=[secret]
+
+
+nano ~/.config/aria2/aria2.session
+# 创建session文件
 ```
 
 3. 启动
@@ -88,8 +92,8 @@ su - root
 loginctl enable-linger xxx
 ```
 
-
 ## ariang
+
 1. 下载地址 [ariang](https://github.com/mayswind/AriaNg/releases)
 
-2. 配置nginx
+2. 配置 nginx

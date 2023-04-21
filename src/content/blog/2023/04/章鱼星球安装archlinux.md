@@ -32,8 +32,7 @@ apt install libarchive-tools
 apt install u-boot-tools
 
 # archlinux
-pacman -S libarchive
-pacman -S uboot-tools
+pacman -S libarchive uboot-tools dosfstools
 ```
 
 4. 下载 archlinux arm 系统
@@ -116,10 +115,18 @@ nano /mnt/etc/fstab
 UUID=[/dev/mmcblk2p2的UUID] / ext4 defaults,noatime,errors=remount-ro 0 1
 UUID=[/dev/mmcblk2p1的UUID] /boot vfat defaults 0 2
 
-touch -m --date="2020-01-20" /etc/fstab
+touch -m --date="2020-01-20" /mnt/etc/fstab
 ```
 
-14. 拔掉 u 盘，卸载分区并重启
+14. 修复开机太快，开启网卡错误的问题
+
+```
+nano /mnt/lib/systemd/system/systemd-networkd.service
+# 在 ExecStart=!!/usr/lib/systemd/systemd-networkd 上一行添加
+ExecStartPre=/usr/bin/sleep 10s
+```
+
+15. 拔掉 u 盘，卸载分区并重启
 
 ```
 cd ~
@@ -191,21 +198,13 @@ useradd -m xxx
 passwd xxx
 ```
 
-8. 修复开机太快，开启网卡错误的问题
-
-```
-nano /lib/systemd/system/systemd-networkd.service
-# 在 ExecStart=!!/usr/lib/systemd/systemd-networkd 上一行添加
-# ExecStartPre=/usr/bin/sleep 10s
-```
-
-9. 重启
+8. 重启
 
 ```
 reboot
 ```
 
-10. 删除 alarm 用户
+9. 删除 alarm 用户
 
 ```
 ssh xxx@192.168.x.x
@@ -214,8 +213,19 @@ su - root
 userdel -r alarm
 ```
 
-11. 重启
+10. 重启
 
 ```
 reboot
+```
+
+## 更新内核后的操作
+
+```
+cd /boot
+cp Image zImage
+mkimage -A arm64 -O linux -T ramdisk -C gzip -n uInitrd -d initramfs-linux.img uInitrd
+
+# 检查 systemd-networkd.service 的修改是否被覆盖
+nano /lib/systemd/system/systemd-networkd.service
 ```
