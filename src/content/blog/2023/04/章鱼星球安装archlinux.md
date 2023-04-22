@@ -1,11 +1,11 @@
 ---
-title: 章鱼星球安装Archlinux
-tags: [章鱼星球, Archlinux]
+title: 章鱼星球安装archlinux
+tags: [章鱼星球, archlinux]
 date: 2023-04-19
 poster: 000001.jpg
 ---
 
-# 章鱼星球安装 Archlinux
+# 章鱼星球安装 archlinux
 
 ## u 盘系统准备
 
@@ -32,7 +32,7 @@ apt install libarchive-tools
 apt install u-boot-tools
 
 # archlinux
-pacman -S libarchive uboot-tools dosfstools
+pacman -S uboot-tools dosfstools wget
 ```
 
 4. 下载 archlinux arm 系统
@@ -152,21 +152,13 @@ su - root
 passwd
 ```
 
-3. 换源 [教程](https://mirrors.ustc.edu.cn/help/archlinuxarm.html)
-
-```
-nano /etc/pacman.d/mirrorlist
-# 在文件开头新增
-Server = https://mirrors.ustc.edu.cn/archlinuxarm/$arch/$repo
-```
-
-4. 设置时区
+3. 设置时区
 
 ```
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ```
 
-5. 本地化
+4. 本地化
 
 ```
 nano /etc/locale.gen
@@ -178,10 +170,18 @@ nano /etc/locale.conf
 # LANG=zh_CN.UTF-8
 ```
 
-6. 修改主机名
+5. 修改主机名
 
 ```
 nano /etc/hostname
+```
+
+6. 换源 [教程](https://mirrors.ustc.edu.cn/help/archlinuxarm.html)
+
+```
+nano /etc/pacman.d/mirrorlist
+# 在文件开头新增
+Server = https://mirrors.ustc.edu.cn/archlinuxarm/$arch/$repo
 ```
 
 7. 更新系统
@@ -193,14 +193,8 @@ pacman-key --populate archlinuxarm
 pacman -Syu
 ```
 
-8. 新增用户
+8. 允许 root ssh 密码登录
 
-```
-useradd -m xxx
-passwd xxx
-```
-
-9. 运行root ssh密码登录
 ```
 nano /etc/ssh/sshd_config
 
@@ -208,22 +202,32 @@ nano /etc/ssh/sshd_config
 PermitRootLogin yes
 ```
 
-10. 重启
+9. 重启
 
 ```
 reboot
 ```
 
+10. root 登录
+
+```
+ssh root@xxx
+```
+
 11. 删除 alarm 用户
 
 ```
-ssh xxx@192.168.x.x
-su - root
-
 userdel -r alarm
 ```
 
-12. 重启
+12. 新增用户
+
+```
+useradd -m xxx
+passwd xxx
+```
+
+13. 重启
 
 ```
 reboot

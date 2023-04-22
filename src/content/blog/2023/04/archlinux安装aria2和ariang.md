@@ -75,15 +75,16 @@ rpc-secret=[secret]
 bt-tracker=[xxx]
 
 
-nano ~/.config/aria2/aria2.session
+touch ~/.config/aria2/aria2.session
 # 创建session文件
 ```
 
 3. 启动
 
 ```
-systemctl --user enable aria2cd.service
 systemctl --user start aria2cd.service
+systemctl --user status aria2cd.service
+systemctl --user enable aria2cd.service
 ```
 
 4. 设置用户服务自启

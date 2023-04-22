@@ -12,19 +12,23 @@ poster: 000001.jpg
 1. 地址 [filebrowser](https://github.com/filebrowser/filebrowser/releases)
 
 ```
-wget xxx
+cd /tmp
+wget https://github.com/filebrowser/filebrowser/releases/download/v2.23.0/linux-arm64-filebrowser.tar.gz
 ```
 
 2. 解压
 
 ```
-tar -xf -C xxx
+mkdir filebrowser
+tar -xf linux-arm64-filebrowser.tar.gz  -C filebrowser
 ```
 
 3. 复制到/usr/local/bin 目录
 
 ```
-cp filebowser /usr/local/bin/filebowser
+su - root
+
+cp /tmp/filebrowser/filebrowser /usr/local/bin/filebrowser
 ```
 
 ## 配置
@@ -62,8 +66,11 @@ ExecStart=/usr/local/bin/filebrowser -c /home/xxx/.config/filebrowser/config.jso
 [Install]
 WantedBy=default.target
 ```
+
 ## 启动
+
 ```
-systemctl --user enable filebrowserd.service
 systemctl --user start filebrowserd.service
+systemctl --user status filebrowserd.service
+systemctl --user enable filebrowserd.service
 ```
