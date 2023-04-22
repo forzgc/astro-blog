@@ -156,18 +156,11 @@ passwd
 
 ```
 nano /etc/pacman.d/mirrorlist
-# Server = https://mirrors.ustc.edu.cn/archlinuxarm/$arch/$repo
+# 在文件开头新增
+Server = https://mirrors.ustc.edu.cn/archlinuxarm/$arch/$repo
 ```
 
-4. 更新系统
-
-```
-pacman-key --init
-pacman-key --populate archlinuxarm
-pacman -Syu
-```
-
-5. 设置时区
+4. 设置时区
 
 ```
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -191,20 +184,37 @@ nano /etc/locale.conf
 nano /etc/hostname
 ```
 
-7. 新增用户
+7. 更新系统
+
+```
+pacman-key --init
+pacman-key --populate archlinuxarm
+
+pacman -Syu
+```
+
+8. 新增用户
 
 ```
 useradd -m xxx
 passwd xxx
 ```
 
-8. 重启
+9. 运行root ssh密码登录
+```
+nano /etc/ssh/sshd_config
+
+# 新增下面配置
+PermitRootLogin yes
+```
+
+10. 重启
 
 ```
 reboot
 ```
 
-9. 删除 alarm 用户
+11. 删除 alarm 用户
 
 ```
 ssh xxx@192.168.x.x
@@ -213,7 +223,7 @@ su - root
 userdel -r alarm
 ```
 
-10. 重启
+12. 重启
 
 ```
 reboot

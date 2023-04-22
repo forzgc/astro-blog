@@ -72,6 +72,8 @@ rpc-listen-all=true
 rpc-listen-port=6800
 rpc-secret=[secret]
 
+bt-tracker=[xxx]
+
 
 nano ~/.config/aria2/aria2.session
 # 创建session文件
